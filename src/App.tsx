@@ -1,8 +1,14 @@
-import {CardHeader} from "./components/card-header/card-header";
-import {MobileSignupFooter} from "./components/mobile-signup-footer/mobile-signup-footer";
+import {store} from "./store/store";
+import {Provider} from "react-redux";
+import {AddOnSection} from "./components/addOn-section/addOn-section";
+import {FinishUpSection} from "./components/finish-up-card-section/finish-up-section";
 
 function App(): JSX.Element {
-  return <MobileSignupFooter></MobileSignupFooter>;
+  return (
+    <Provider store={store}>
+      <FinishUpSection></FinishUpSection>
+    </Provider>
+  );
 }
 
 export default App;
