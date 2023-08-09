@@ -15,6 +15,7 @@ export const MultiStepFormCard = (): JSX.Element => {
   const dispatch = userAppDispatch();
   const step = userAppSelector((state) => state.user.step);
   const infoStep = userAppSelector((state) => state.stepFunction.nextFunction);
+  console.log(infoStep);
   const nextFunction = () => {
     dispatch(incrementStep());
   };

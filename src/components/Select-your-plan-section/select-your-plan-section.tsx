@@ -1,14 +1,13 @@
-import {useEffect, useRef} from "react";
+import {useEffect} from "react";
 import {userAppDispatch, userAppSelector} from "../../store/hooks";
 import {CardHeader} from "../card-header/card-header";
-import {PlanCard, planCardRefType} from "../plan-card/plan-card";
+import {PlanCard} from "../plan-card/plan-card";
 import {PlanIntervalSwitcher} from "../plan-interval-switcher/plan-interval-switcher";
 import {addUser} from "../../store/signup-component-slice";
 import {changeStepFunction} from "../../store/step-functions-slice";
 
 export const PlanSection = (): JSX.Element => {
   const planInterval = userAppSelector((state) => state.user.paymentInterval);
-  const planCardRef = useRef<planCardRefType[]>([]);
 
   const user = userAppSelector((state) => state.user);
   const dispatch = userAppDispatch();
