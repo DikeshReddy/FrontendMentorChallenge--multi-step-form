@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import {CardHeader} from "../card-header/card-header";
 import {InputField} from "../input-field/input-field";
 import {userAppDispatch, userAppSelector} from "../../store/hooks";
@@ -6,6 +6,7 @@ import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
 
 import type {InputStateHandle} from "../input-field/input-field";
 import {addUser} from "../../store/signup-component-slice";
+import {changeStepFunction} from "../../store/step-functions-slice";
 
 export const PersonalInfoSection = (): JSX.Element => {
   const inputRef = useRef<InputStateHandle[]>([]);
@@ -31,8 +32,22 @@ export const PersonalInfoSection = (): JSX.Element => {
         userState = {...userState, number: element.value};
         dispatch(addUser(userState));
       }
+      if (
+        userState.name.length != 0 &&
+        userState.email.length != 0 &&
+        userState.number.length != 0
+      ) {
+        dispatch(addUser({...userState, step: 2}));
+      }
     });
   };
+  let stepFunctionState = userAppSelector((state) => state.stepFunction);
+
+  useEffect(() => {
+    dispatch(
+      changeStepFunction({...stepFunctionState, nextFunction: onNextClick})
+    );
+  }, []);
 
   return (
     <div className="personal-info-section flex flex-col gap-[30px] ">
@@ -57,14 +72,11 @@ export const PersonalInfoSection = (): JSX.Element => {
         <InputField
           ref={(el: InputStateHandle) => (inputRef.current[2] = el)}
           type="text"
-          id="phone-number"
+          id="number"
           label="Phone Number"
           placeholder="e.g.+1 234 567 890"
         ></InputField>
       </form>
-      <MobileSignupFooter
-        NextStepButtonHandler={onNextClick}
-      ></MobileSignupFooter>
     </div>
   );
 };

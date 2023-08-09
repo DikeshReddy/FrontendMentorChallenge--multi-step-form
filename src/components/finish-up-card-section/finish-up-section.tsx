@@ -1,12 +1,9 @@
-import {userAppSelector} from "../../store/hooks";
+import {userAppDispatch, userAppSelector} from "../../store/hooks";
 import {CardHeader} from "../card-header/card-header";
-import {PlanCard} from "../plan-card/plan-card";
-
-type FinishUpSectionProps = {
-  isPlanCard: boolean;
-  isTotalCard: boolean;
-  children: string;
-};
+import {addUser} from "../../store/signup-component-slice";
+import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
+import {useEffect} from "react";
+import {changeStepFunction} from "../../store/step-functions-slice";
 
 const prices: Record<string, number> = {
   "Online service": 1,
@@ -20,8 +17,9 @@ const prices: Record<string, number> = {
 export const FinishUpSection = (): JSX.Element => {
   let paymentInterval = userAppSelector((state) => state.user.paymentInterval);
   let addOn = userAppSelector((state) => state.user.addOn);
-
+  let user = userAppSelector((state) => state.user);
   let plan = userAppSelector((state) => state.user.plan);
+  const dispatch = userAppDispatch();
 
   const firstToUppercase = (word: string): string => {
     const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
@@ -38,6 +36,29 @@ export const FinishUpSection = (): JSX.Element => {
     return total;
   };
 
+  const backHandler = () => {
+    dispatch(addUser({...user, step: 3}));
+  };
+  const nextHandler = () => {
+    dispatch(addUser({...user, step: 5}));
+  };
+  const changeHandler = () => {
+    dispatch(addUser({...user, step: 2}));
+  };
+
+  const stepFunctionState = userAppSelector((state) => state.stepFunction);
+
+  useEffect(() => {
+    dispatch(
+      changeStepFunction({
+        ...stepFunctionState,
+        nextFunction: nextHandler,
+        backFunction: backHandler,
+        changeFunction: changeHandler,
+      })
+    );
+  }, []);
+
   return (
     <div className="finish-up-section">
       <CardHeader title="Finishing up">
@@ -51,7 +72,10 @@ export const FinishUpSection = (): JSX.Element => {
                 <p className="plan-name font-extrabold text-blue-100">{`${firstToUppercase(
                   plan
                 )}(${firstToUppercase(paymentInterval)})`}</p>
-                <p className="change underline decoration-2 font-bold text-gray-100">
+                <p
+                  className="change underline decoration-2 font-bold text-gray-100 cursor-pointer"
+                  onClick={changeHandler}
+                >
                   Change
                 </p>
               </div>
@@ -80,7 +104,9 @@ export const FinishUpSection = (): JSX.Element => {
               paymentInterval === "monthly" ? "month" : "year"
             })`}</p>
             <p className="total-cost text-blue-200 text-[1.25rem] font-extrabold">
-              {`+${TotalCost()}/${paymentInterval === "monthly" ? "mo" : "yr"}`}
+              {`+${
+                paymentInterval === "monthly" ? TotalCost() : TotalCost() * 10
+              }/${paymentInterval === "monthly" ? "mo" : "yr"}`}
             </p>
           </div>
         </div>

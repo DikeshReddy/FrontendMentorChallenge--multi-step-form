@@ -51,10 +51,12 @@ export const AddOnCard = ({
           />
         </div>
         <div className="content ">
-          <p className="content__title font-bold text-blue-100 text-[1.25rem]">
+          <p className="content__title font-bold text-blue-100 text-[1rem]">
             {title}
           </p>
-          <p className="content__info font-thin text-gray-100">{children}</p>
+          <p className="content__info font-thin text-gray-100 text-[0.75rem]">
+            {children}
+          </p>
         </div>
       </div>
       <p className="price text-blue-200 justify-self-end">

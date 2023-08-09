@@ -7,6 +7,7 @@ type userState = {
   plan: "arcade" | "pro" | "advanced";
   paymentInterval: "monthly" | "yearly";
   addOn: Array<string>;
+  step: number;
 };
 
 const initialState: userState = {
@@ -16,6 +17,7 @@ const initialState: userState = {
   plan: "arcade",
   paymentInterval: "monthly",
   addOn: ["Online service", "Larger storage", "Customizable profile"],
+  step: 1,
 };
 
 const userSlice = createSlice({

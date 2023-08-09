@@ -1,5 +1,12 @@
-import {ChangeEvent, forwardRef, useImperativeHandle, useState} from "react";
+import {
+  ChangeEvent,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import {twMerge as tm} from "tailwind-merge";
+import {userAppSelector} from "../../store/hooks";
 
 export type InputFieldProps = React.HTMLAttributes<HTMLInputElement> & {
   id: string;
@@ -18,6 +25,17 @@ export const InputField = forwardRef<InputStateHandle, InputFieldProps>(
   ({id, type, label, placeholder, ...props}, ref) => {
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [value, setValue] = useState<string>("");
+    const state = userAppSelector((state) => state.user);
+
+    const user: Record<string, string> = {
+      name: state.name,
+      email: state.email,
+      number: state.number,
+    };
+
+    useEffect(() => {
+      setValue(user[id]);
+    }, []);
 
     const valueHandler = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value);
@@ -47,6 +65,7 @@ export const InputField = forwardRef<InputStateHandle, InputFieldProps>(
           placeholder={placeholder}
           {...props}
           onChange={valueHandler}
+          defaultValue={user[id]}
         />
         <p
           className={tm(
