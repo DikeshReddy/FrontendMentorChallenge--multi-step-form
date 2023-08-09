@@ -1,7 +1,6 @@
 import {userAppDispatch, userAppSelector} from "../../store/hooks";
 import {CardHeader} from "../card-header/card-header";
 import {addUser} from "../../store/signup-component-slice";
-import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
 import {useEffect} from "react";
 import {changeStepFunction} from "../../store/step-functions-slice";
 

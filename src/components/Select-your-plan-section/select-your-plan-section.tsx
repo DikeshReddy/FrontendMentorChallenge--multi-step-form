@@ -4,7 +4,6 @@ import {CardHeader} from "../card-header/card-header";
 import {PlanCard, planCardRefType} from "../plan-card/plan-card";
 import {PlanIntervalSwitcher} from "../plan-interval-switcher/plan-interval-switcher";
 import {addUser} from "../../store/signup-component-slice";
-import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
 import {changeStepFunction} from "../../store/step-functions-slice";
 
 export const PlanSection = (): JSX.Element => {

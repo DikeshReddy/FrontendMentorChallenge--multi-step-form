@@ -4,7 +4,6 @@ import {addUser} from "../../store/signup-component-slice";
 import {changeStepFunction} from "../../store/step-functions-slice";
 import {AddOnCard} from "../addOn-card/addOn-card";
 import {CardHeader} from "../card-header/card-header";
-import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
 
 export const AddOnSection = () => {
   const user = userAppSelector((state) => state.user);

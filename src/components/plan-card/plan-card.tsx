@@ -16,7 +16,7 @@ export type planCardRefType = {
 };
 
 export const PlanCard = forwardRef<planCardRefType, PlanCardProps>(
-  ({image, title, price, planInterval}, ref) => {
+  ({image, title, price, planInterval}) => {
     const [selected, setSelected] = useState<boolean>(false);
     let plan = userAppSelector((state) => state.user.plan);
     let state = userAppSelector((state) => state.user);

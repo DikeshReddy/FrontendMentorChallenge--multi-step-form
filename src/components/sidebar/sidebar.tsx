@@ -9,7 +9,7 @@ export const SideBar = (): JSX.Element => {
         <div className="flex items-center gap-[16px]">
           <div
             className={tm(
-              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[2px] border-solid border-white",
+              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[1px] border-solid border-white",
               step === 1 ? `bg-blue-400 text-blue-100 border-blue-400` : ``
             )}
           >
@@ -23,7 +23,7 @@ export const SideBar = (): JSX.Element => {
         <div className="flex items-center gap-[16px]">
           <div
             className={tm(
-              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[2px] border-solid border-white",
+              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[1px] border-solid border-white",
               step === 2 ? `bg-blue-400 text-blue-100 border-blue-400` : ``
             )}
           >
@@ -37,7 +37,7 @@ export const SideBar = (): JSX.Element => {
         <div className="flex items-center gap-[16px]">
           <div
             className={tm(
-              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[2px] border-solid border-white",
+              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[1px] border-solid border-white",
               step === 3 ? `bg-blue-400 text-blue-100 border-blue-400` : ``
             )}
           >
@@ -51,7 +51,7 @@ export const SideBar = (): JSX.Element => {
         <div className="flex items-center gap-[16px]">
           <div
             className={tm(
-              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[2px] border-solid border-white",
+              "number 1 font-extrabold w-[33px] h-[33px] flex justify-center items-center rounded-full text-white border-[1px] border-solid border-white",
               step === 4
                 ? `bg-blue-400 text-blue-100 border-blue-400`
                 : step === 5

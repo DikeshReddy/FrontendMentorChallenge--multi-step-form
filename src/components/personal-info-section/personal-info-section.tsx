@@ -2,7 +2,6 @@ import {useEffect, useRef} from "react";
 import {CardHeader} from "../card-header/card-header";
 import {InputField} from "../input-field/input-field";
 import {userAppDispatch, userAppSelector} from "../../store/hooks";
-import {MobileSignupFooter} from "../mobile-signup-footer/mobile-signup-footer";
 
 import type {InputStateHandle} from "../input-field/input-field";
 import {addUser} from "../../store/signup-component-slice";

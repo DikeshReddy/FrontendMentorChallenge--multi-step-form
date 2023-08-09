@@ -1,9 +1,18 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import {InputField} from "./input-field";
+import {Provider} from "react-redux";
+import {store} from "../../store/store";
 
 const meta: Meta<typeof InputField> = {
   component: InputField,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <Provider store={store}>
+        <Story></Story>
+      </Provider>
+    ),
+  ],
 };
 
 export default meta;
