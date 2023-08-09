@@ -43,21 +43,18 @@ export const PlanSection = (): JSX.Element => {
           price={9}
           planInterval={planInterval}
           title="Arcade"
-          ref={(el) => planCardRef.current[0] === el}
         ></PlanCard>
         <PlanCard
           image="advanced"
           price={12}
           planInterval={planInterval}
           title="Advanced"
-          ref={(el) => planCardRef.current[0] === el}
         ></PlanCard>
         <PlanCard
           image="pro"
           price={15}
           planInterval={planInterval}
           title="Pro"
-          ref={(el) => planCardRef.current[0] === el}
         ></PlanCard>
       </div>
       <PlanIntervalSwitcher></PlanIntervalSwitcher>

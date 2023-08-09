@@ -27,8 +27,14 @@ const userSlice = createSlice({
     addUser: (state: userState, action: PayloadAction<userState>) => {
       return {...state, ...action.payload};
     },
+    incrementStep: (state: userState) => {
+      state.step++;
+    },
+    decrementStep: (state: userState) => {
+      state.step--;
+    },
   },
 });
 
-export const {addUser} = userSlice.actions;
+export const {addUser, incrementStep, decrementStep} = userSlice.actions;
 export default userSlice.reducer;

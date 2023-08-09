@@ -5,7 +5,7 @@ export const SideBar = (): JSX.Element => {
   const step = userAppSelector((state) => state.user.step);
   return (
     <div className="lg:p-[16px] flex w-full h-full">
-      <div className="sidebar flex gap-[16px] justify-center py-[34px] w-full lg:h-full lg:flex-col  lg:self-start lg:p-[32px] lg:bg-[url(./images/bg-sidebar-desktop.svg)] bg-no-repeat bg-contain  lg:justify-start flex-grow">
+      <div className="sidebar flex gap-[16px] justify-center py-[34px] w-full lg:h-full lg:flex-col  lg:self-start lg:p-[32px] lg:bg-[url(../images/bg-sidebar-desktop.svg)] bg-no-repeat bg-contain  lg:justify-start flex-grow">
         <div className="flex items-center gap-[16px]">
           <div
             className={tm(

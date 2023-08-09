@@ -1,4 +1,6 @@
-import {userAppSelector} from "../../store/hooks";
+import {useRef} from "react";
+import {userAppDispatch, userAppSelector} from "../../store/hooks";
+import {decrementStep, incrementStep} from "../../store/signup-component-slice";
 import {PlanSection} from "../Select-your-plan-section/select-your-plan-section";
 import {AddOnSection} from "../addOn-section/addOn-section";
 import {FinishUpSection} from "../finish-up-card-section/finish-up-section";
@@ -7,15 +9,20 @@ import {PersonalInfoSection} from "../personal-info-section/personal-info-sectio
 import {SideBar} from "../sidebar/sidebar";
 import {ThankYouSection} from "../thank-you-section/thank-you-section";
 import {twMerge as tm} from "tailwind-merge";
+import type {PersonalInfoRefType} from "../personal-info-section/personal-info-section";
 
 export const MultiStepFormCard = (): JSX.Element => {
+  const dispatch = userAppDispatch();
   const step = userAppSelector((state) => state.user.step);
-  const nextFunction = userAppSelector(
-    (state) => state.stepFunction.nextFunction
-  );
-  const backFunction = userAppSelector(
-    (state) => state.stepFunction.backFunction
-  );
+  const infoStep = userAppSelector((state) => state.stepFunction.nextFunction);
+  const nextFunction = () => {
+    dispatch(incrementStep());
+  };
+  const backFunction = () => {
+    dispatch(decrementStep());
+  };
+
+  const infoStepFunction = useRef<PersonalInfoRefType>();
 
   return (
     <div className="form-section  lg:flex h-[100vh] lg:justify-center lg:items-center ">
@@ -33,7 +40,11 @@ export const MultiStepFormCard = (): JSX.Element => {
           )}
         >
           {step === 1 ? (
-            <PersonalInfoSection></PersonalInfoSection>
+            <PersonalInfoSection
+              ref={(ele: PersonalInfoRefType) =>
+                (infoStepFunction.current = ele)
+              }
+            ></PersonalInfoSection>
           ) : step === 2 ? (
             <PlanSection></PlanSection>
           ) : step === 3 ? (
@@ -45,7 +56,11 @@ export const MultiStepFormCard = (): JSX.Element => {
           )}
           {step != 5 ? (
             <MobileSignupFooter
-              NextStepButtonHandler={nextFunction}
+              NextStepButtonHandler={
+                step === 1
+                  ? infoStepFunction.current?.onNextClick
+                  : nextFunction
+              }
               GoBackButtonHandler={backFunction}
             ></MobileSignupFooter>
           ) : (
@@ -55,7 +70,9 @@ export const MultiStepFormCard = (): JSX.Element => {
       </div>
       <MobileSignupFooter
         className="flex justify-between w-full absolute bottom-0 bg-white lg:hidden"
-        NextStepButtonHandler={nextFunction}
+        NextStepButtonHandler={
+          step === 1 ? infoStepFunction.current?.onNextClick : nextFunction
+        }
         GoBackButtonHandler={backFunction}
       ></MobileSignupFooter>
     </div>
